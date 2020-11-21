@@ -32,5 +32,6 @@ class SentenceTransformerDataset:
         return {
             'ids': torch.tensor(ids, dtype=torch.long),
             'mask': torch.tensor(mask, dtype=torch.long),
+            'text': self.text[item],
             'targets': self.target[item]
         }

@@ -19,3 +19,19 @@ class SentenceTransformer(torch.nn.Module):
         output = po #Pooled embedding
 
         return output
+
+class SequenceClassifier(torch.nn.Module):
+    def __init__(self):
+        super(SequenceClassifier, self).__init__()
+        self.bert = AutoModelForSequenceClassification.from_pretrained(config.MODEL2)
+
+  
+    def forward(self, ids, mask):
+        logits = self.bert(
+            ids, 
+            attention_mask=mask,
+        )
+
+        return logits
+
+

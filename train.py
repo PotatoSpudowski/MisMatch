@@ -28,9 +28,11 @@ batch_data_loader = torch.utils.data.DataLoader(
     )
 
 print("Generating embeddings")
-embeddings, labels = generate_embeddings(batch_data_loader, model, device)
+embeddings, texts, labels = generate_embeddings(batch_data_loader, model, device)
 with open('embeddings.pkl', 'wb') as f:
     pickle.dump(embeddings, f)
+with open('texts.pkl', 'wb') as f:
+    pickle.dump(texts, f)
 with open('labels.pkl', 'wb') as f:
     pickle.dump(labels, f)
 
