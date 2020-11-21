@@ -36,8 +36,8 @@ with open('labels.pkl', 'wb') as f:
 
 annoy_index = build_annoy_index(
     embeddings, 
-    config.BATCH_SIZE, 
-    config.BATCH_SIZE)
+    config.MAXLEN, 
+    config.TREES)
 
 annoy_index.save("annoy_index")
 
