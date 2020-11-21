@@ -7,8 +7,8 @@ from model.model import SentenceTransformer
 from data.data import SentenceTransformerDataset
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 
-# device = utils.get_device()
-device = 'cpu'
+device = utils.get_device()
+# device = 'cpu'
 
 df = pd.read_csv('inputs/data.csv')
 texts = df['text'].values

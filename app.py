@@ -7,9 +7,8 @@ from model import model
 
 app = Flask(__name__)
 
-# device = get_device()
+device = get_device()
 
-print(model.test())
 # device = 'cpu' #Force cpu
 
 
