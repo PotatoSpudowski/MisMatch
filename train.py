@@ -27,13 +27,14 @@ batch_data_loader = torch.utils.data.DataLoader(
         num_workers=4
     )
 
+print("Generating embeddings")
 embeddings, labels = generate_embeddings(batch_data_loader, model, device)
-
 with open('embeddings.pkl', 'wb') as f:
     pickle.dump(embeddings, f)
 with open('labels.pkl', 'wb') as f:
     pickle.dump(labels, f)
 
+print("Building Annoy Index")
 annoy_index = build_annoy_index(
     embeddings, 
     config.FEATURE_SIZE, 
