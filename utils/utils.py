@@ -3,6 +3,17 @@ import numpy as np
 from config import config
 from annoy import AnnoyIndex
 from tqdm import tqdm
+import re
+
+def clean_tweet(tweet):
+       return ' '.join(re.sub("(@)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|(http\S+)", " ", tweet).split())
+
+def clean_tweets(sentences):
+    result = []
+    for sentence in sentences:
+        sentence = clean_tweet(sentence)
+        result.append(sentence)
+    return result
 
 def get_device():
     if torch.cuda.is_available():

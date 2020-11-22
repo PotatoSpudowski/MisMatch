@@ -1,7 +1,7 @@
 import flask
 import pickle
 from config import config
-from utils.utils import get_device, get_embedding, load_annoy_index, get_entail_scores
+from utils.utils import get_device, get_embedding, load_annoy_index, get_entail_scores, clean_tweet
 from flask import Flask, redirect, session, request
 from model.model import SentenceTransformer, SequenceClassifier
 
@@ -38,14 +38,14 @@ def make_prediction():
 	req_data = request.get_json()
 	tweet_id = req_data['id']
 	sentence = req_data['sentence']
-	# sentences = clean_tweets(sentences)
+	sentences = clean_tweet(sentence)
 	embedding = get_embedding(sentence, model1, device)
 	nns_ids = annoy_index.get_nns_by_vector(
 		embedding,
 		config.NEIGHBOURS, 
 		search_k=config.SEARCH_K)
 
-	simTexts = [texts[i] for i in nns_ids]
+	simTexts = [clean_tweet(texts[i]) for i in nns_ids]
 	simLabels = [labels[i].detach().numpy().tolist() for i in nns_ids]
 
 	scores = get_entail_scores(sentence, simTexts, model2, device)
