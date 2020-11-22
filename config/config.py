@@ -6,7 +6,7 @@ MAXLEN = 280
 TREES = 100
 FEATURE_SIZE = 768
 
-NEIGHBOURS = 10
+NEIGHBOURS = 5
 SEARCH_K = 100
 
 MODEL1 = "sentence-transformers/roberta-base-nli-stsb-mean-tokens"

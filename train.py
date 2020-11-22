@@ -43,5 +43,3 @@ annoy_index = build_annoy_index(
     config.TREES)
 
 annoy_index.save("annoy_index")
-
-

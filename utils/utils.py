@@ -71,13 +71,13 @@ def build_annoy_index(features, feature_size, no_of_trees):
 
 def load_annoy_index(path, feature_size):
     annoy_index = AnnoyIndex(feature_size, metric='angular')
-    annoy_index.load('test.ann')
+    annoy_index.load(path)
 
     return annoy_index
 
 def get_entail_scores(inputText, simTexts, model, device):
     tokenizer = config.TOKENIZER2
-    SeqPairs = [(inputText, simTexts) for i in range(len(simTexts))]
+    SeqPairs = [(inputText, simTexts[i]) for i in range(len(simTexts))]
     inputs = tokenizer(SeqPairs, 
                        padding=True, 
                        truncation=True, 
@@ -85,8 +85,10 @@ def get_entail_scores(inputText, simTexts, model, device):
     input_ids = inputs["input_ids"].to(device)
     attention_mask = inputs["attention_mask"].to(device)
 
-    logits = model(input_ids=input_ids, attention_mask=attention_mask)[0]
+    logits = model(ids=input_ids, mask=attention_mask)[0]
     entail_contr_logits = np.array([logits[:,0], logits[:,2]])
     outputs = np.exp(entail_contr_logits) / np.exp(entail_contr_logits).sum(-1, keepdims=True)
     outputs = [o.cpu().detach().numpy() for o in outputs][1]
+
+    return outputs
 
