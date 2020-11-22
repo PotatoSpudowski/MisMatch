@@ -2,6 +2,15 @@
 
 Checking missinformation service
 
+A Webapp that receives tweets as input and identifies if a similar tweet has been flagged as False or True.
+
+We generate embeddings of all the previously flagged Tweets/Text data and create an Approximate nearest neighbor Index that we can use to retrieve similar embeddings, given an input embedding.
+
+From the nearest neighbors, we can get similar tweets and we compare our input tweet with similar tweets using a model similar to the zero-shot classification model. The model tells us if the inputs contradict or not. If they do not and we have a high score, we can assume that the inputs are similar and can assign the same label to the query tweet. The label corresponding to the tweet combination with the highest score is returned.
+
+## Return Body
+![Api Call](https://github.com/PotatoSpudowski/MisMatch/blob/main/images/2.png)
+
 ## Requirements
 Python 3.7.6
 
