@@ -1,6 +1,6 @@
 # MisMatch
 
-Checking missinformation service
+Checking misinformation service
 
 A Webapp that receives tweets as input and identifies if a similar tweet has been flagged as False or True.
 
