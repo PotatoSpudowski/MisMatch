@@ -26,3 +26,7 @@ To run the service just run the command:
 ```
 python app.py
 ```
+To re index new Tweets/Texts add them in the Inputs folder and run:
+```
+python train.py
+```
