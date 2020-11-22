@@ -33,5 +33,3 @@ class SequenceClassifier(torch.nn.Module):
         )
 
         return logits
-
-
